@@ -33,10 +33,9 @@ export default function AdminPage() {
 
   const handleUpdate = async (id: string, updates: Partial<Problem>) => {
     setUpdatingId(id);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore – Supabase generated types resolve to never; runtime schema is valid
-    const { error } = await supabase.from("problems").update(updates as any).eq("id", id);
+    const { error } = await supabase.from("problems").update(updates as never).eq("id", id);
     if (!error) {
       setReports((prev) => prev.map((p) => (p.id === id ? { ...p, ...updates } : p)));
     }

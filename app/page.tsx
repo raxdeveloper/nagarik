@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Map, AlertCircle, Users, CheckCircle2, Activity, Globe, Zap, ArrowRight, Home, BarChart } from "lucide-react";
+import { Map, AlertCircle, Users, CheckCircle2, Activity, ArrowRight } from "lucide-react";
 import { supabase } from "@/lib/supabase/client";
 import { useStore } from "@/lib/store/useStore";
 import { ReportForm } from "@/components/problems/ReportForm";
@@ -81,7 +81,7 @@ export default function HomePage() {
           supabase.from("users").select("*", { count: "exact", head: true }),
           supabase.from("problems").select("district_id").not("district_id", "is", null)
         ]);
-        const uniqueDist = new Set((distRes.data as any)?.map((p: any) => p.district_id)).size;
+        const uniqueDist = new Set((distRes.data as { district_id: string }[])?.map((p) => p.district_id)).size;
         
         // Use ?? 0 to strictly use real data and avoid rendering mock fallbacks when Count is 0
         setStats({
@@ -90,7 +90,7 @@ export default function HomePage() {
           users: usersRes.count ?? 0, 
           districts: uniqueDist || 0
         });
-      } catch (err) {
+      } catch {
         setStats({ total: 0, solved: 0, users: 0, districts: 0 });
       }
     }
@@ -180,7 +180,7 @@ export default function HomePage() {
         <div className="glass-card rounded-[3rem] p-12 md:p-20 relative overflow-hidden border-white/10">
           <div className="absolute inset-0 bg-gradient-to-tr from-[#DC143C]/20 via-transparent to-[#003893]/20 opacity-30" />
           <h2 className="relative z-10 text-4xl md:text-6xl font-heading font-black text-white mb-6">
-            Nepal's Future <br/> Starts Here.
+            Nepal&apos;s Future <br/> Starts Here.
           </h2>
           <button onClick={handleReportAction} className="relative z-10 btn-primary px-8 py-4 bg-white text-black text-lg">
             Submit a Report

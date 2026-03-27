@@ -99,10 +99,9 @@ export function ReportForm() {
         // Award Nagrika Score
         if (user) {
           try {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore – RPC function exists at runtime; Supabase types unaware of it
-            await supabase.rpc("increment_nagrika_score" as any, { user_id: user.id, amount: 50 });
+            await supabase.rpc("increment_nagrika_score" as never, { user_id: user.id, amount: 50 });
           } catch { }
         }
         setSuccess(true);

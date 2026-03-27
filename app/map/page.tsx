@@ -16,7 +16,6 @@ export default function MapPage() {
   const router = useRouter();
   const { problems, setProblems, addProblem, filters, nav, setSelectedProblemId, setView, setShowReportForm } = useStore();
   const [NepalMap, setNepalMap] = useState<React.ComponentType<{ problems: Problem[] }> | null>(null);
-  const [loading, setLoading] = useState(true);
   const [filterOpen, setFilterOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -37,7 +36,6 @@ export default function MapPage() {
   // Fetch problems
   useEffect(() => {
     async function fetchProblems() {
-      setLoading(true);
       let query = supabase.from("problems").select("*").order("created_at", { ascending: false }).limit(200);
       if (filters.category) query = query.eq("category", filters.category);
       if (filters.status) query = query.eq("status", filters.status);
@@ -46,7 +44,6 @@ export default function MapPage() {
 
       const { data, error } = await query;
       if (!error && data) setProblems(data as Problem[]);
-      setLoading(false);
     }
     fetchProblems();
   }, [filters, setProblems]);

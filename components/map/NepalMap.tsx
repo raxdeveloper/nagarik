@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useStore } from "@/lib/store/useStore";
-import { CATEGORY_CONFIG, NEPAL_CENTER, NEPAL_DEFAULT_ZOOM, PROVINCE_COLORS } from "@/lib/constants";
+import { CATEGORY_CONFIG, NEPAL_DEFAULT_ZOOM, PROVINCE_COLORS } from "@/lib/constants";
 import { Problem } from "@/lib/supabase/database.types";
 
 interface NepalMapProps {

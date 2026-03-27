@@ -69,6 +69,7 @@ export function LocationPicker({ lat, lng, onChange }: LocationPickerProps) {
       map.remove();
       mapRef.current = null;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleLocateMe = () => {

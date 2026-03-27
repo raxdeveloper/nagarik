@@ -57,6 +57,7 @@ export function Navbar() {
         
         {/* Logo */}
         <Link href="/" className="flex items-center justify-center w-[160px] md:w-[220px] h-[80px] group select-none overflow-hidden relative mr-2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img 
             src="/logo.png" 
             alt="Nagrika Logo" 
