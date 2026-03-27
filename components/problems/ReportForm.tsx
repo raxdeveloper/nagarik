@@ -50,7 +50,7 @@ export function ReportForm() {
   const canNext = () => {
     if (step === 0) return form.latitude !== 0 && form.longitude !== 0;
     if (step === 1) return form.category !== null;
-    if (step === 2) return form.title.trim().length >= 5 && form.description.trim().length >= 10;
+    if (step === 2) return form.title.trim().length >= 5 && form.description.trim().length >= 10 && form.images.length >= 1;
     return true;
   };
 
@@ -227,7 +227,7 @@ export function ReportForm() {
                   </div>
                 </div>
                 <div>
-                  <label className="text-xs text-white/40 mb-1 block">Photos (max 5, jpg/png)</label>
+                  <label className="text-xs text-white/40 mb-1 block">Photos (min 1, max 5) *</label>
                   <label className="flex items-center gap-2 p-3 border border-dashed border-white/15 rounded-xl cursor-pointer hover:border-white/30 transition-all">
                     <Upload size={14} className="text-white/40" />
                     <span className="text-xs text-white/40">{form.images.length > 0 ? `${form.images.length} file(s) selected` : "Click to upload images"}</span>
