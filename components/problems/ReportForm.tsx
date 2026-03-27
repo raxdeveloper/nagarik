@@ -50,7 +50,7 @@ export function ReportForm() {
   const canNext = () => {
     if (step === 0) return form.latitude !== 0 && form.longitude !== 0;
     if (step === 1) return form.category !== null;
-    if (step === 2) return form.title.trim().length >= 5 && form.description.trim().length >= 10 && form.images.length >= 1;
+    if (step === 2) return form.title.trim().length >= 3 && form.description.trim().length >= 5 && form.images.length >= 1;
     return true;
   };
 
@@ -194,7 +194,7 @@ export function ReportForm() {
             ) : step === 2 ? (
               <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-3">
                 <div>
-                  <label className="text-xs text-white/40 mb-1 block">Problem Title *</label>
+                  <label className="text-xs text-white/40 mb-1 block">Problem Title (min 3 chars) *</label>
                   <input
                     type="text"
                     value={form.title}
@@ -205,7 +205,7 @@ export function ReportForm() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-white/40 mb-1 block">Description *</label>
+                  <label className="text-xs text-white/40 mb-1 block">Description (min 5 chars) *</label>
                   <textarea
                     value={form.description}
                     onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
