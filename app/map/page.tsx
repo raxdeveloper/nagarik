@@ -99,23 +99,25 @@ export default function MapPage() {
       <div className="pointer-events-none absolute inset-0 z-10 flex flex-col pt-[88px]">
         
         {/* Top Control Bar Floating */}
-        <div className="pointer-events-auto flex items-center gap-2 px-4 py-3 mx-4 mt-4 glass-dark rounded-2xl shadow-2xl flex-shrink-0">
-          <button
-            onClick={() => setFilterOpen(!filterOpen)}
-            className={`p-2 rounded-xl transition-all ${filterOpen ? "bg-white text-black" : "text-white/60 hover:text-white hover:bg-white/10"}`}
-          >
-            <SlidersHorizontal size={18} />
-          </button>
+        <div className="pointer-events-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-2 p-3 mx-4 mt-4 glass-dark rounded-2xl shadow-2xl flex-shrink-0">
+          <div className="flex items-center gap-2 flex-1">
+            <button
+              onClick={() => setFilterOpen(!filterOpen)}
+              className={`p-2 rounded-xl transition-all ${filterOpen ? "bg-white text-black" : "text-white/60 hover:text-white hover:bg-white/10"}`}
+            >
+              <SlidersHorizontal size={18} />
+            </button>
 
-          <div className="flex-1 max-w-sm relative">
-            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
-            <input
-              type="text"
-              placeholder="Search city, problem..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2 text-[15px] font-medium text-white placeholder-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all"
-            />
+            <div className="flex-1 max-w-sm relative">
+              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-1.5 text-sm md:text-[15px] font-medium text-white placeholder-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all"
+              />
+            </div>
           </div>
 
           <div className="flex items-center gap-1 glass rounded-xl p-1 ml-auto">
@@ -141,7 +143,7 @@ export default function MapPage() {
           
           {/* Filters Sidebar */}
           {filterOpen && (
-            <div className="pointer-events-auto w-80 flex-shrink-0 glass-dark rounded-3xl overflow-hidden shadow-2xl h-fit max-h-full overflow-y-auto">
+            <div className="pointer-events-auto w-full sm:w-80 flex-shrink-0 glass-dark rounded-3xl overflow-hidden shadow-2xl h-fit max-h-[60vh] sm:max-h-full overflow-y-auto z-20">
               <FilterSidebar />
             </div>
           )}
@@ -166,7 +168,7 @@ export default function MapPage() {
 
           {/* Detail Side Panel Overlay */}
           {nav.selectedProblemId && (
-            <div className="pointer-events-auto w-96 flex-shrink-0 ml-auto glass-dark rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.8)] flex flex-col h-full right-bound">
+            <div className="pointer-events-auto w-full sm:w-96 flex-shrink-0 ml-auto glass-dark rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.8)] flex flex-col h-full right-bound z-30">
               <ProblemDetailPanel problemId={nav.selectedProblemId} />
             </div>
           )}

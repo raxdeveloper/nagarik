@@ -121,7 +121,7 @@ export function ReportForm() {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="relative w-full max-w-lg glass-dark border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+        className="relative w-full max-w-[calc(100vw-2rem)] sm:max-w-lg glass-dark border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
       >
         {/* Header */}
         <div className="flex items-center justify-between p-5 border-b border-white/5">

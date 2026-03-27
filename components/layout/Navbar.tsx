@@ -56,12 +56,12 @@ export function Navbar() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-[88px] flex items-center justify-between">
         
         {/* Logo */}
-        <Link href="/" className="flex items-center justify-center w-[160px] md:w-[220px] h-[80px] group select-none overflow-hidden relative mr-2">
+        <Link href="/" className="flex items-center w-[120px] xs:w-[140px] md:w-[220px] h-[60px] md:h-[80px] group select-none overflow-hidden relative mr-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img 
             src="/logo.png" 
             alt="Nagrika Logo" 
-            className="absolute w-[180%] h-[180%] object-contain scale-110 md:scale-125 transition-transform duration-200 group-hover:scale-[1.3]" 
+            className="absolute w-[180%] h-[180%] object-contain scale-[1.3] md:scale-125 transition-transform duration-200 group-hover:scale-[1.4]" 
           />
         </Link>
 
@@ -124,10 +124,10 @@ export function Navbar() {
 
         {/* Mobile menu toggle */}
         <button
-          className="md:hidden p-2 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all"
+          className="md:hidden p-2 -mr-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all z-[60]"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
-          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </nav>
 

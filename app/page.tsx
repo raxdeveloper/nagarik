@@ -50,16 +50,16 @@ function BentoStats({ stats }: { stats: { total: number; solved: number; users: 
             initial={{ opacity: 0, y: 30 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ delay: 0.2 + (i * 0.1) }}
-            className="glass-card rounded-[2rem] p-8 flex flex-col items-center justify-center text-center relative overflow-hidden group"
+            className="glass-card rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-8 flex flex-col items-center justify-center text-center relative overflow-hidden group"
           >
             <div className={`absolute top-0 left-0 w-full h-1 opacity-20 group-hover:opacity-100 transition-opacity bg-gradient-to-r from-transparent via-current to-transparent ${s.color}`} />
-            <div className={`mb-6 p-4 rounded-2xl bg-white/5 border border-white/10 ${s.color} group-hover:scale-110 transition-transform`}>
-              <Icon size={32} strokeWidth={1.5} />
+            <div className={`mb-4 md:mb-6 p-3 md:p-4 rounded-xl md:rounded-2xl bg-white/5 border border-white/10 ${s.color} group-hover:scale-110 transition-transform`}>
+              <Icon strokeWidth={1.5} className="w-6 h-6 md:w-8 md:h-8" />
             </div>
-            <div className="text-5xl md:text-6xl font-heading font-black text-white mb-2 tracking-tight">
+            <div className="text-4xl md:text-6xl font-heading font-black text-white mb-1 md:mb-2 tracking-tight">
               <AnimatedNumber target={s.value} />
             </div>
-            <div className="text-sm font-medium text-white/50 uppercase tracking-widest">{s.label}</div>
+            <div className="text-[10px] md:text-sm font-medium text-white/50 uppercase tracking-widest leading-tight">{s.label}</div>
           </motion.div>
         );
       })}
@@ -122,7 +122,7 @@ export default function HomePage() {
             Live Updates Across All 7 Provinces
           </div>
           
-          <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] font-heading font-black text-white leading-[1] tracking-[-0.03em] mb-8 drop-shadow-2xl text-center">
+          <h1 className="text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] font-heading font-black text-white leading-[1.05] tracking-[-0.03em] mb-8 drop-shadow-2xl text-center">
             Empowering <br className="hidden sm:block"/> The Citizens.
           </h1>
           

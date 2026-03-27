@@ -54,10 +54,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${yantra.variable} ${mukta.variable} bg-[#030303] text-[#f8f8f8] min-h-screen antialiased`}
+        className={`${yantra.variable} ${mukta.variable} bg-[#030303] text-[#f8f8f8] min-h-screen antialiased overflow-x-hidden`}
       >
         <Navbar />
-        <main className="pt-16">{children}</main>
+        <main className="pt-16 min-h-screen overflow-x-hidden">{children}</main>
         <Toaster />
       </body>
     </html>
