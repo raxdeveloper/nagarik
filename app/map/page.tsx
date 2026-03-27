@@ -10,12 +10,24 @@ import { FilterSidebar } from "@/components/map/FilterSidebar";
 import { ReportForm } from "@/components/problems/ReportForm";
 import { SlidersHorizontal, Search, Map, List, LayoutGrid, Loader2 } from "lucide-react";
 
+import { useRouter } from "next/navigation";
+
 export default function MapPage() {
+  const router = useRouter();
   const { problems, setProblems, addProblem, filters, nav, setSelectedProblemId, setView, setShowReportForm } = useStore();
   const [NepalMap, setNepalMap] = useState<React.ComponentType<{ problems: Problem[] }> | null>(null);
   const [loading, setLoading] = useState(true);
   const [filterOpen, setFilterOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const handleReportAction = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      setShowReportForm(true);
+    } else {
+      router.push("/login?redirect=report");
+    }
+  };
 
   // Dynamically import map (SSR safe)
   useEffect(() => {
@@ -122,7 +134,7 @@ export default function MapPage() {
             ))}
           </div>
 
-          <button onClick={() => setShowReportForm(true)} className="btn-primary ml-2 py-2 px-4 text-sm hidden sm:flex">
+          <button onClick={handleReportAction} className="btn-primary ml-2 py-2 px-4 text-sm hidden sm:flex">
             Report Issue
           </button>
         </div>

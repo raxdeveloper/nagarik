@@ -3,11 +3,13 @@
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Map, AlertCircle, Users, CheckCircle2, Activity, Globe, Zap, ArrowRight, Home, BarChart } from "lucide-react";
 import { supabase } from "@/lib/supabase/client";
 import { useStore } from "@/lib/store/useStore";
 import { ReportForm } from "@/components/problems/ReportForm";
 
+// ... existing AnimatedNumber and BentoStats ...
 function AnimatedNumber({ target, duration = 2000 }: { target: number; duration?: number }) {
   const [current, setCurrent] = useState(0);
   const startTime = useRef<number | null>(null);
@@ -66,6 +68,7 @@ function BentoStats({ stats }: { stats: { total: number; solved: number; users: 
 }
 
 export default function HomePage() {
+  const router = useRouter();
   const { nav, setShowReportForm } = useStore();
   const [stats, setStats] = useState({ total: 0, solved: 0, users: 0, districts: 0 });
 
@@ -94,6 +97,15 @@ export default function HomePage() {
     fetchStats();
   }, []);
 
+  const handleReportAction = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      setShowReportForm(true);
+    } else {
+      router.push("/login?redirect=report");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#030303] selection:bg-white selection:text-black grid-bg relative">
       <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#DC143C] opacity-[0.05] blur-[150px] pointer-events-none" />
@@ -120,7 +132,7 @@ export default function HomePage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full max-w-md mx-auto">
-            <button onClick={() => setShowReportForm(true)} className="btn-primary w-full shadow-xl">
+            <button onClick={handleReportAction} className="btn-primary w-full shadow-xl">
               Take Action Now <ArrowRight size={18} strokeWidth={2.5} />
             </button>
             <Link href="/map" className="btn-ghost w-full">
@@ -170,7 +182,7 @@ export default function HomePage() {
           <h2 className="relative z-10 text-4xl md:text-6xl font-heading font-black text-white mb-6">
             Nepal's Future <br/> Starts Here.
           </h2>
-          <button onClick={() => setShowReportForm(true)} className="relative z-10 btn-primary px-8 py-4 bg-white text-black text-lg">
+          <button onClick={handleReportAction} className="relative z-10 btn-primary px-8 py-4 bg-white text-black text-lg">
             Submit a Report
           </button>
         </div>

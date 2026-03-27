@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Map, BarChart3, Trophy, FileText, Home, LogIn, LogOut, Menu, X, Globe, Plus } from "lucide-react";
@@ -19,6 +19,7 @@ const navLinks = [
 
 export function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const { nav, setLanguage, setShowReportForm } = useStore();
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -40,6 +41,15 @@ export function Navbar() {
 
   const toggleLanguage = () => setLanguage(nav.language === "en" ? "np" : "en");
   const handleLogout = async () => { await supabase.auth.signOut(); setUser(null); };
+
+  const handleReportAction = () => {
+    setMobileOpen(false);
+    if (user) {
+      setShowReportForm(true);
+    } else {
+      router.push("/login?redirect=report");
+    }
+  };
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "glass-dark shadow-[0_1px_0_rgba(255,255,255,0.05)]" : "bg-transparent"}`}>
@@ -93,7 +103,7 @@ export function Navbar() {
           </button>
 
           <button
-            onClick={() => setShowReportForm(true)}
+            onClick={handleReportAction}
             className="flex items-center gap-1.5 px-4 py-1.5 bg-[#DC143C] hover:bg-[#c01030] text-white text-[13px] font-heading font-semibold rounded-xl transition-all nepal-red-glow"
           >
             <Plus size={14} strokeWidth={2.5} />
@@ -147,7 +157,7 @@ export function Navbar() {
               ))}
               <div className="pt-3 border-t border-white/[0.06] flex flex-col gap-2">
                 <button
-                  onClick={() => { setShowReportForm(true); setMobileOpen(false); }}
+                  onClick={handleReportAction}
                   className="w-full px-4 py-2.5 bg-[#DC143C] text-white text-sm font-heading font-semibold rounded-xl nepal-red-glow flex items-center justify-center gap-2"
                 >
                   <Plus size={14} /> Report a Problem
