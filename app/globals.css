@@ -3,25 +3,234 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-0: #030303;
+  --bg-1: #0a0a0a;
+  --bg-2: #111111;
+  --nepal-red: #DC143C;
+  --nepal-blue: #003893;
+  --border: 0 0% 12%;
+  --input: 0 0% 12%;
+  --ring: 0 0% 80%;
+  --background: 0 0% 1%;
+  --foreground: 0 0% 98%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-0);
+  color: #f8f8f8;
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+/* ── Minimalist Custom Scrollbar ──────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
+
+/* ── Clean Background ─────────────────────────────── */
+.grid-bg {
+  background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center;
+}
+
+/* ── Minimalist Glass effects ─────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-dark {
+  background: rgba(3, 3, 3, 0.6);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+  transform: translateY(-2px);
+}
+
+/* ── Gradient borders ───────────────────────────────── */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(220,20,60,0.5), rgba(0,56,147,0.5), rgba(255,255,255,0.05));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ── Glow effects ───────────────────────────────────── */
+.nepal-red-glow {
+  box-shadow: 0 0 32px rgba(220, 20, 60, 0.2), 0 8px 16px rgba(220, 20, 60, 0.1);
+}
+
+/* ── Gradient text ──────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #a3a3a3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-nepal {
+  background: linear-gradient(135deg, #DC143C 0%, #ff4d71 50%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Clean Map overrides ────────────────────────────── */
+.leaflet-container {
+  background: #030303 !important;
+  font-family: var(--font-body), sans-serif;
+}
+
+/* Remove disturbing highlights and thick borders on map hover */
+path.leaflet-interactive {
+  outline: none !important;
+  transition: fill-opacity 0.4s ease, stroke-opacity 0.4s ease !important;
+}
+
+.leaflet-control-attribution {
+  display: none !important; /* Minimalist UI removes attribution from view */
+}
+
+.leaflet-control-zoom {
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+}
+
+.leaflet-control-zoom a {
+  background: rgba(10, 10, 10, 0.8) !important;
+  color: #fff !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+  backdrop-filter: blur(10px);
+}
+
+.leaflet-control-zoom a:hover {
+  background: rgba(220, 20, 60, 0.4) !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgba(10, 10, 10, 0.95) !important;
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8) !important;
+  color: #fff !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(10, 10, 10, 0.95) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.marker-cluster-small, .marker-cluster-medium, .marker-cluster-large {
+  background: rgba(220, 20, 60, 0.15) !important;
+}
+
+.marker-cluster-small div, .marker-cluster-medium div, .marker-cluster-large div {
+  background: rgba(220, 20, 60, 0.8) !important;
+  color: white !important;
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+/* ── Minimalist Buttons ──────────────────────────────── */
+.btn-primary {
+  padding: 0.75rem 2rem;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 2rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.btn-primary:hover {
+  background: #f0f0f0;
+  transform: scale(1.02);
+  box-shadow: 0 0 32px rgba(255, 255, 255, 0.15);
+}
+
+.btn-ghost {
+  padding: 0.75rem 2rem;
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 2rem;
+  border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: #fff;
+}
+
+/* ── Status colors ───────────────────────────────────── */
+.status-reported  { color: #a1a1aa; }
+.status-verified  { color: #60a5fa; }
+.status-in_progress { color: #fbbf24; }
+.status-solved    { color: #34d399; }
+.status-rejected  { color: #f87171; }
+
+.leaflet-tooltip-custom {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }

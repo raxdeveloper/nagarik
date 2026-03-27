@@ -1,0 +1,40 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "Province": 1, "Province_Name": "Koshi Province" },
+      "geometry": { "type": "Polygon", "coordinates": [[[86.2, 28.1], [88.1, 28.1], [88.1, 26.3], [86.2, 26.3], [86.2, 28.1]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Province": 2, "Province_Name": "Madhesh Province" },
+      "geometry": { "type": "Polygon", "coordinates": [[[84.8, 27.1], [86.9, 27.1], [86.9, 26.6], [84.8, 26.6], [84.8, 27.1]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Province": 3, "Province_Name": "Bagmati Province" },
+      "geometry": { "type": "Polygon", "coordinates": [[[84.2, 28.3], [86.3, 28.3], [86.3, 26.9], [84.2, 26.9], [84.2, 28.3]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Province": 4, "Province_Name": "Gandaki Province" },
+      "geometry": { "type": "Polygon", "coordinates": [[[82.8, 29.3], [85.2, 29.3], [85.2, 27.4], [82.8, 27.4], [82.8, 29.3]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Province": 5, "Province_Name": "Lumbini Province" },
+      "geometry": { "type": "Polygon", "coordinates": [[[81.2, 28.6], [84.2, 28.6], [84.2, 27.3], [81.2, 27.3], [81.2, 28.6]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Province": 6, "Province_Name": "Karnali Province" },
+      "geometry": { "type": "Polygon", "coordinates": [[[81.1, 30.4], [83.5, 30.4], [83.5, 28.1], [81.1, 28.1], [81.1, 30.4]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Province": 7, "Province_Name": "Sudurpashchim Province" },
+      "geometry": { "type": "Polygon", "coordinates": [[[80.0, 30.1], [81.6, 30.1], [81.6, 28.4], [80.0, 28.4], [80.0, 30.1]]] }
+    }
+  ]
+}
